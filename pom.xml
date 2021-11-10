@@ -10,15 +10,16 @@
     <name>Test Serenity and Cucumber</name>
 
     <properties>
-        <serenity.version>2.6.0</serenity.version>
-        <serenity.maven.version>2.5.10</serenity.maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <encoding>UTF-8</encoding>
         <tags></tags>
+        <serenity.version>3.0.5</serenity.version>
+        <serenity.maven.version>3.0.5</serenity.maven.version>
         <parallel.tests>4</parallel.tests>
         <webdriver.base.url></webdriver.base.url>
-        <cucumber.version>6.11.0</cucumber.version>
-        <serenity.cucumber6.version>2.6.0</serenity.cucumber6.version>
+        <cucumber.version>7.0.0</cucumber.version>
+        <serenity.cucumber.version>3.0.5</serenity.cucumber.version>
+        <maven.plugins.version>3.0.0-M5</maven.plugins.version>
     </properties>
     <dependencies>
         <dependency>
@@ -45,8 +46,8 @@
         </dependency>
             <dependency>
                 <groupId>net.serenity-bdd</groupId>
-                <artifactId>serenity-cucumber6</artifactId>
-                <version>${serenity.cucumber6.version}</version>
+                <artifactId>serenity-cucumber</artifactId>
+                <version>${serenity.cucumber.version}</version>
             </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -58,16 +59,6 @@
             <artifactId>lombok</artifactId>
             <version>1.18.22</version>
         </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>${cucumber.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>${cucumber.version}</version>
-        </dependency>
 
         <!-- Testing -->
         <dependency>
@@ -77,9 +68,26 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-screenplay-webdriver</artifactId>
+            <version>${serenity.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>5.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.8.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -94,14 +102,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M4</version>
+                <version>${maven.plugins.version}</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M4</version>
+                <version>${maven.plugins.version}</version>
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
@@ -113,6 +121,7 @@
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
                     </systemPropertyVariables>
                     <parallel>classes</parallel>
+                    <parallel>methods</parallel>
                     <threadCount>${parallel.tests}</threadCount>
                     <forkCount>${parallel.tests}</forkCount>
                 </configuration>
@@ -128,7 +137,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>

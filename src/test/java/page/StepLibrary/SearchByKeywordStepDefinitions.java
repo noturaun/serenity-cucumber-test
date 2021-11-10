@@ -1,19 +1,11 @@
-package starter.stepdefinitions;
+package page.StepLibrary;
 
-import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Step;
-import org.openqa.selenium.WebDriver;
-import starter.GoogleSearch;
+import page.GoogleSearch;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class GoogleSearchStepDefinitions {
-
-    @Managed(driver = "chrome", options = "--headless")
-    WebDriver browser;
-
-    String actor;
-    String keyword;
+public class SearchByKeywordStepDefinitions {
 
     GoogleSearch page;
 

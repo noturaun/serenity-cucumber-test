@@ -1,4 +1,4 @@
-package starter;
+package page;
 
 public class Calculator {
     private int total;
